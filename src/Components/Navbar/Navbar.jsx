@@ -2,11 +2,13 @@ import { FaSearch } from "react-icons/fa";
 import "./Navbar.css";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
- 
+import proPic from "./../../../public/svg/man.svg";
+import planImg from "../../../public/svg/plan-list-svgrepo-com.svg";
+
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState("");
   const location = useLocation();
- 
+
   useEffect(() => {
     setActiveLink(location.pathname);
   }, [location]);
@@ -30,27 +32,27 @@ const Navbar = () => {
           className="logo flex items-center cursor-pointer hover:scale-105 transition-all duration-200"
         >
           <span className="text-2xl lg:text-4xl font-bold">plut</span>
-          <img
-            className="h-10 lg:h-14 ml-2"
-            src="../../../public/svg/plan-list-svgrepo-com.svg"
-            alt="logo"
-          />
+          <img className="h-10 lg:h-14 ml-2" src={planImg} alt="logo" />
         </Link>
 
         {/* Navbar Links */}
         <div className="hidden md:flex flex-grow justify-center gap-4 md:gap-6 lg:gap-10">
-          {["/", "/employee", "/hiring", "/report", "/files", "/payroll"].map((path, index) => (
-            <Link
-              key={index}
-              onClick={() => handleLinkClick(path)}
-              className={`hover:text-blue-500  font-semibold   sm:text-xl md:text-lg lg:text-xl ${
-                activeLink === path ? "text-blue-600" : "text-gray-600"
-              } active:text-blue-600`}
-              to={path}
-            >
-              {path === "/" ? "Home" : path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
-            </Link>
-          ))}
+          {["/", "/employee", "/hiring", "/report", "/files", "/payroll"].map(
+            (path, index) => (
+              <Link
+                key={index}
+                onClick={() => handleLinkClick(path)}
+                className={`hover:text-blue-500  font-semibold   sm:text-xl md:text-lg lg:text-xl ${
+                  activeLink === path ? "text-blue-600" : "text-gray-600"
+                } active:text-blue-600`}
+                to={path}
+              >
+                {path === "/"
+                  ? "Home"
+                  : path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
+              </Link>
+            )
+          )}
         </div>
 
         {/* Search Bar */}
@@ -72,25 +74,29 @@ const Navbar = () => {
             <div className="text-gray-500">{formatDate(currentDate)}</div>
           </div>
           <figure className="w-10 h-10 lg:w-14 lg:h-14 rounded-full overflow-hidden bg-gray-200">
-            <img src="../../../public/svg/man.svg" alt="profile" className="w-full h-full" />
+            <img src={proPic} alt="profile" className="w-full h-full" />
           </figure>
         </div>
       </div>
 
       {/* Mobile Menu */}
       <div className="flex md:hidden mt-4 space-x-2">
-        {["/", "/employee", "/hiring", "/report", "/files", "/payroll"].map((path, index) => (
-          <Link
-            key={index}
-            onClick={() => handleLinkClick(path)}
-            className={`text-base ${
-              activeLink === path ? "text-blue-600" : "text-gray-800"
-            } hover:text-blue-500`}
-            to={path}
-          >
-            {path === "/" ? "Home" : path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
-          </Link>
-        ))}
+        {["/", "/employee", "/hiring", "/report", "/files", "/payroll"].map(
+          (path, index) => (
+            <Link
+              key={index}
+              onClick={() => handleLinkClick(path)}
+              className={`text-base ${
+                activeLink === path ? "text-blue-600" : "text-gray-800"
+              } hover:text-blue-500`}
+              to={path}
+            >
+              {path === "/"
+                ? "Home"
+                : path.slice(1).charAt(0).toUpperCase() + path.slice(2)}
+            </Link>
+          )
+        )}
       </div>
     </nav>
   );
